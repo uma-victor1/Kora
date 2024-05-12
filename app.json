@@ -14,7 +14,8 @@
     "scheme": "kora",
     "assetBundlePatterns": ["**/*"],
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "package": "com.madfinger.kora"
     },
     "android": {
       "adaptiveIcon": {
