@@ -1,28 +1,45 @@
-import { StyleSheet, Text, View, ScrollView, Image } from "react-native";
-import { useState } from "react";
+import { StyleSheet, Text, View, ScrollView, Image, Alert } from "react-native";
+import { useState, useEffect } from "react";
 import React from "react";
 import { SafeAreaView } from "react-native-safe-area-context";
 import FormField from "../../components/FormField";
 import { images } from "../../constants";
 import CustomButton from "../../components/CustomButton";
 import { Link, router } from "expo-router";
-import { createUser } from "../../lib/appwrite";
 import { useGlobalContext } from "../../contexts/globalContext";
+
 const SignIn = () => {
   const [form, setForm] = useState({
     email: "",
     password: "",
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const account = useGlobalContext();
+
+  const { signIn, user } = useGlobalContext();
 
   const submit = async () => {
-    console.log("hola");
-    // const signuser = await createUser();
-    // if (signuser) {
-    //   router.replace("/index");
-    // }
+    try {
+      if (!form.email || !form.password) {
+        Alert.alert("Error", "Fill in all credentials before submitting");
+        return;
+      }
+
+      const user = await signIn(form.email, form.password);
+      if (!user) {
+        Alert.alert("Error", "user doesn't exist");
+      }
+      router.push("../");
+    } catch (error) {
+      Alert.alert("Error", error.message);
+      throw new Error(error.message);
+    }
   };
+
+  useEffect(() => {
+    if (user) {
+      router.push("/");
+    }
+  }, []);
 
   return (
     <SafeAreaView className="bg-primary h-full">
@@ -78,5 +95,3 @@ const SignIn = () => {
 };
 
 export default SignIn;
-
-const styles = StyleSheet.create({});

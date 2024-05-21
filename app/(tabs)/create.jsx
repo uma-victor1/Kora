@@ -1,12 +1,15 @@
-import { View, Text } from 'react-native'
-import React from 'react'
+import { View, Text, ScrollView } from "react-native";
+import React from "react";
+import { SafeAreaView } from "react-native-safe-area-context";
 
 const create = () => {
   return (
-    <View>
-      <Text>create</Text>
-    </View>
-  )
-}
+    <SafeAreaView>
+      <ScrollView>
+        <Text> hello</Text>
+      </ScrollView>
+    </SafeAreaView>
+  );
+};
 
-export default create
+export default create;

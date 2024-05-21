@@ -3,7 +3,7 @@ import { SafeAreaView, StyleSheet, Text, View } from "react-native";
 import { SplashScreen, Stack } from "expo-router";
 import { useFonts } from "expo-font";
 import { useEffect } from "react";
-import { UseGlobalProvider } from "../contexts/globalContext";
+import UseGlobalProvider from "../contexts/globalContext";
 
 SplashScreen.preventAutoHideAsync();
 
