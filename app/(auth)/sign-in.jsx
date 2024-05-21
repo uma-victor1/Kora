@@ -5,15 +5,25 @@ import { SafeAreaView } from "react-native-safe-area-context";
 import FormField from "../../components/FormField";
 import { images } from "../../constants";
 import CustomButton from "../../components/CustomButton";
-import { Link } from "expo-router";
+import { Link, router } from "expo-router";
+import { createUser } from "../../lib/appwrite";
+import { useGlobalContext } from "../../contexts/globalContext";
 const SignIn = () => {
   const [form, setForm] = useState({
     email: "",
     password: "",
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const account = useGlobalContext();
 
-  const submit = () => {};
+  const submit = async () => {
+    console.log("hola");
+    // const signuser = await createUser();
+    // if (signuser) {
+    //   router.replace("/index");
+    // }
+  };
+
   return (
     <SafeAreaView className="bg-primary h-full">
       <ScrollView>
