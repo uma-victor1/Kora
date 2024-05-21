@@ -1,4 +1,4 @@
-import { account, avatar, ID } from "../lib/appwrite";
+import { account, avatar, database, ID, config } from "../lib/appwrite";
 import { useState, useEffect, createContext, useContext } from "react";
 import { router } from "expo-router";
 
@@ -31,6 +31,15 @@ const UseGlobalProvider = ({ children }) => {
       const user = await signIn(email, password);
       console.log(user, "user", avatarUrl, "url");
       setUser(user);
+
+      // save user info to database
+      const { databaseId, userCollectionId } = config;
+      await database.createDocument(databaseId, userCollectionId, ID.unique(), {
+        accountid: userAccount.$id,
+        email,
+        username,
+        avatar: avatarUrl,
+      });
     } catch (error) {
       console.error(error);
       throw new Error(error.message);
