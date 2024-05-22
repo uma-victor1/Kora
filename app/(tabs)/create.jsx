@@ -6,7 +6,7 @@ const create = () => {
   return (
     <SafeAreaView>
       <ScrollView>
-        <Text> hello</Text>
+        <Text>Create</Text>
       </ScrollView>
     </SafeAreaView>
   );
