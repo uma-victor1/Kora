@@ -10,17 +10,20 @@ import {
 import React, { useState } from "react";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { images, icons } from "../../constants";
+import EmptyComponent from "../../components/EmptyComponent";
 
-const TrendingVideos = () => {
+const TrendingVideos = ({ posts }) => {
   return (
-    <FlatList
-      data={[{ id: 1 }, { id: 2 }, { id: 3 }]}
-      keyExtractor={(item) => item.$id}
-      renderItem={({ item }) => (
-        <Text className="text-3xl text-white">{item.id}</Text>
-      )}
-      horizontal
-    ></FlatList>
+    <View className="">
+      <FlatList
+        data={posts}
+        keyExtractor={(item) => item.$id}
+        renderItem={({ item }) => (
+          <Text className="text-3xl text-white">{item.id}</Text>
+        )}
+        horizontal
+      ></FlatList>
+    </View>
   );
 };
 
@@ -60,7 +63,7 @@ const Home = () => {
             </View>
             <View className="flex-row justify-between items-center relative">
               <TextInput
-                className="flex-1 w-full border-[1px] font-psemibold rounded-xl text-white text-base bg-black-100 px-4 py-6 border-black-200"
+                className="flex-1 w-full border-[1px] font-pregular rounded-xl text-gray-100 text-base bg-black-100 px-4 py-5 border-black-200"
                 // value={value}
                 placeholder="Search for a video topic"
                 placeholderTextColor="#CDCDE0"
@@ -72,23 +75,17 @@ const Home = () => {
                 className="h-5 w-5 absolute right-4"
               />
             </View>
-            <Text className="text-base text-gray-100 leading-5 font-medium tracking-wide">
+            <Text className="text-lg text-gray-100 leading-5 font-pregular tracking-wide pb-5">
               Trending Videos
             </Text>
-            <TrendingVideos />
+            <TrendingVideos posts={[{ id: 1 }, { id: 2 }, { id: 3 }] ?? []} />
           </View>
         )}
         ListEmptyComponent={() => (
-          <View className="flex-1 justify-center items-center">
-            <Image
-              source={images.empty}
-              resizeMode="contain"
-              className="h-20 w-20 mb-4"
-            />
-            <Text className="text-base text-gray-100 leading-[24px] font-medium tracking-wide">
-              No videos found.
-            </Text>
-          </View>
+          <EmptyComponent
+            title="No videos"
+            subtitle="You can add your own videos"
+          />
         )}
         refreshControl={
           <RefreshControl
