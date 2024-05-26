@@ -5,8 +5,9 @@ import {
   FlatList,
   Image,
   TextInput,
+  RefreshControl,
 } from "react-native";
-import React from "react";
+import React, { useState } from "react";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { images, icons } from "../../constants";
 
@@ -24,6 +25,14 @@ const TrendingVideos = () => {
 };
 
 const Home = () => {
+  const [refreshing, setRefreshing] = useState(false);
+  const onRefresh = React.useCallback(() => {
+    setRefreshing(true);
+    setTimeout(() => {
+      setRefreshing(false);
+    }, 2000);
+  }, []);
+
   return (
     <SafeAreaView className="bg-primary h-full">
       <FlatList
@@ -69,6 +78,25 @@ const Home = () => {
             <TrendingVideos />
           </View>
         )}
+        ListEmptyComponent={() => (
+          <View className="flex-1 justify-center items-center">
+            <Image
+              source={images.empty}
+              resizeMode="contain"
+              className="h-20 w-20 mb-4"
+            />
+            <Text className="text-base text-gray-100 leading-[24px] font-medium tracking-wide">
+              No videos found.
+            </Text>
+          </View>
+        )}
+        refreshControl={
+          <RefreshControl
+            refreshing={refreshing}
+            onRefresh={onRefresh}
+            tintColor="white"
+          />
+        }
       ></FlatList>
     </SafeAreaView>
   );
