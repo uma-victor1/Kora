@@ -76,7 +76,7 @@ const Home = () => {
               />
             </View>
             <Text className="text-lg text-gray-100 leading-5 font-pregular tracking-wide pb-5">
-              Trending Videos
+              Latest Videos
             </Text>
             <TrendingVideos posts={[{ id: 1 }, { id: 2 }, { id: 3 }] ?? []} />
           </View>
