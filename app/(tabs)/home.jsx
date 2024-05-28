@@ -84,7 +84,7 @@ const Home = () => {
         ListEmptyComponent={() => (
           <EmptyComponent
             title="No videos"
-            subtitle="You can add your own videos"
+            subtitle="You can add your own videos."
           />
         )}
         refreshControl={
