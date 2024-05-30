@@ -7,10 +7,12 @@ import {
   TextInput,
   RefreshControl,
 } from "react-native";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { images, icons } from "../../constants";
 import EmptyComponent from "../../components/EmptyComponent";
+import { getAllPosts } from "../../lib/appwrite";
+import useAppwrite from "../../hooks/useAppwrite";
 
 const TrendingVideos = ({ posts }) => {
   return (
@@ -28,13 +30,16 @@ const TrendingVideos = ({ posts }) => {
 };
 
 const Home = () => {
+  const { data: videos, isLoading, refetch } = useAppwrite(getAllPosts);
+
+  console.log(videos, "posts");
   const [refreshing, setRefreshing] = useState(false);
-  const onRefresh = React.useCallback(() => {
+  const onRefresh = async () => {
     setRefreshing(true);
-    setTimeout(() => {
-      setRefreshing(false);
-    }, 2000);
-  }, []);
+
+    await refetch();
+    setRefreshing(false);
+  };
 
   return (
     <SafeAreaView className="bg-primary h-full">
