@@ -13,13 +13,14 @@ import { images, icons } from "../../constants";
 import EmptyComponent from "../../components/EmptyComponent";
 import { getAllPosts } from "../../lib/appwrite";
 import useAppwrite from "../../hooks/useAppwrite";
+import Video from "../../components/Video";
 
 const TrendingVideos = ({ posts }) => {
   return (
     <View className="">
       <FlatList
         data={posts}
-        keyExtractor={(item) => item.$id}
+        keyExtractor={(item) => item.id}
         renderItem={({ item }) => (
           <Text className="text-3xl text-white">{item.id}</Text>
         )}
@@ -32,7 +33,7 @@ const TrendingVideos = ({ posts }) => {
 const Home = () => {
   const { data: videos, isLoading, refetch } = useAppwrite(getAllPosts);
 
-  console.log(videos, "posts");
+  console.log(...videos, "posts");
   const [refreshing, setRefreshing] = useState(false);
   const onRefresh = async () => {
     setRefreshing(true);
@@ -44,11 +45,9 @@ const Home = () => {
   return (
     <SafeAreaView className="bg-primary h-full">
       <FlatList
-        data={[{ id: 1 }, { id: 2 }, { id: 3 }]}
+        data={videos}
         keyExtractor={(item) => item.$id}
-        renderItem={({ item }) => (
-          <Text className="text-3xl text-white">{item.id}</Text>
-        )}
+        renderItem={({ item }) => <Video video={item} />}
         ListHeaderComponent={() => (
           <View className="my-6 px-4 space-y-6">
             <View className="justify-between items-start flex-row mb-6">
