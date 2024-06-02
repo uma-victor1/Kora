@@ -33,7 +33,7 @@ const TrendingVideos = ({ posts }) => {
 const Home = () => {
   const { data: videos, isLoading, refetch } = useAppwrite(getAllPosts);
 
-  console.log(...videos, "posts");
+  console.log(JSON.stringify(...videos, null, "\t"), "posts");
   const [refreshing, setRefreshing] = useState(false);
   const onRefresh = async () => {
     setRefreshing(true);
