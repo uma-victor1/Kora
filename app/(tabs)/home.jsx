@@ -14,26 +14,14 @@ import EmptyComponent from "../../components/EmptyComponent";
 import { getAllPosts } from "../../lib/appwrite";
 import useAppwrite from "../../hooks/useAppwrite";
 import Video from "../../components/Video";
-
-const TrendingVideos = ({ posts }) => {
-  return (
-    <View className="">
-      <FlatList
-        data={posts}
-        keyExtractor={(item) => item.id}
-        renderItem={({ item }) => (
-          <Text className="text-3xl text-white">{item.id}</Text>
-        )}
-        horizontal
-      ></FlatList>
-    </View>
-  );
-};
+import { getLatestPosts } from "../../lib/appwrite";
+import TrendingVideos from "../../components/TrendingVideos";
 
 const Home = () => {
   const { data: videos, isLoading, refetch } = useAppwrite(getAllPosts);
+  const { data: latestVideos } = useAppwrite(getLatestPosts);
 
-  console.log(JSON.stringify(...videos, null, "\t"), "posts");
+  console.log(JSON.stringify(...latestVideos, null, "\t"), "posts");
   const [refreshing, setRefreshing] = useState(false);
   const onRefresh = async () => {
     setRefreshing(true);
@@ -82,7 +70,7 @@ const Home = () => {
             <Text className="text-lg text-gray-100 leading-5 font-pregular tracking-wide pb-5">
               Latest Videos
             </Text>
-            <TrendingVideos posts={[{ id: 1 }, { id: 2 }, { id: 3 }] ?? []} />
+            <TrendingVideos trendingVideos={latestVideos ?? []} />
           </View>
         )}
         ListEmptyComponent={() => (
