@@ -4,9 +4,11 @@ import {
   FlatList,
   TouchableOpacity,
   ImageBackground,
+  Image,
 } from "react-native";
 import React, { useState } from "react";
 import * as Animatable from "react-native-animatable";
+import { icons } from "../constants";
 
 const zoomIn = {
   0: {
@@ -47,6 +49,11 @@ const TrendingItem = ({ activeItem, item }) => {
             className="w-52 h-72 rounded-[35px] my-5 overflow-hidden shadow-lg shadow-black/40"
             resizeMode="cover"
           />
+          <Image
+            source={icons.play}
+            className="w-12 h-12 absolute"
+            resizeMode="contain"
+          ></Image>
         </TouchableOpacity>
       )}
     </Animatable.View>
