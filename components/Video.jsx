@@ -47,7 +47,7 @@ const Video = ({
       </View>
       {/* vide0 */}
       {play ? (
-        <Text className="text-white">Playing</Text>
+        <Text className="text-white">Playing video</Text>
       ) : (
         <TouchableOpacity
           className="w-full h-60 rounded-xl mt-3 relative justify-center items-center"
