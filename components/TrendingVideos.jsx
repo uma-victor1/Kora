@@ -28,6 +28,7 @@ const zoomOut = {
 };
 const TrendingItem = ({ activeItem, item }) => {
   const [play, setPlay] = useState(false);
+
   return (
     <Animatable.View
       className="mr-5"
@@ -62,6 +63,7 @@ const TrendingItem = ({ activeItem, item }) => {
 
 const TrendingVideos = ({ trendingVideos }) => {
   const [activeItem, setActiveItem] = useState(trendingVideos[0]);
+
   return (
     <View className="">
       <FlatList
@@ -70,6 +72,13 @@ const TrendingVideos = ({ trendingVideos }) => {
         renderItem={({ item }) => (
           <TrendingItem item={item} activeItem={activeItem} />
         )}
+        onViewableItemsChanged={({ viewableItems }) => {
+          if (viewableItems.length > 0) {
+            setActiveItem(viewableItems[0].key);
+          }
+        }}
+        viewabilityConfig={{ itemVisiblePercentThreshold: 70 }}
+        contentOffset={{ x: 170 }}
         horizontal
       ></FlatList>
     </View>
