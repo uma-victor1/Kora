@@ -41,7 +41,7 @@ const TrendingItem = ({ activeItem, item }) => {
         <Video
           onError={(err) => console.log(err, "errorplay")}
           source={{
-            uri: "https://vod-adaptive-ak.vimeocdn.com/exp=1717869691~acl=%2F3adc087d-55ce-4a7c-99bf-039b51330c97%2F%2A~hmac=e09c081b2a5260f836c855edaff05af048342e19186e5500c6a7d2327881f16c/3adc087d-55ce-4a7c-99bf-039b51330c97/parcel/video/1fc4192b.mp4",
+            uri: item.video,
           }}
           className="w-52 h-72 rounded-[33px] mt-3 bg-white/10"
           resizeMode={ResizeMode.CONTAIN}

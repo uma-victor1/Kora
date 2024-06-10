@@ -13,10 +13,10 @@ import { images, icons } from "../../constants";
 import EmptyComponent from "../../components/EmptyComponent";
 import { getAllPosts } from "../../lib/appwrite";
 import useAppwrite from "../../hooks/useAppwrite";
-import Video from "../../components/Video";
+import VideoCard from "../../components/Video";
 import { getLatestPosts } from "../../lib/appwrite";
 import TrendingVideos from "../../components/TrendingVideos";
-
+import SearchInput from "../../components/SearchInput";
 const Home = () => {
   const { data: videos, isLoading, refetch } = useAppwrite(getAllPosts);
   const { data: latestVideos } = useAppwrite(getLatestPosts);
@@ -35,7 +35,7 @@ const Home = () => {
       <FlatList
         data={videos}
         keyExtractor={(item) => item.$id}
-        renderItem={({ item }) => <Video video={item} />}
+        renderItem={({ item }) => <VideoCard video={item} />}
         ListHeaderComponent={() => (
           <View className="my-6 px-4 space-y-6">
             <View className="justify-between items-start flex-row mb-6">
@@ -53,20 +53,7 @@ const Home = () => {
                 resizeMode="contain"
               ></Image>
             </View>
-            <View className="flex-row justify-between items-center relative">
-              <TextInput
-                className="flex-1 w-full border-[1px] font-pregular rounded-xl text-gray-100 text-base bg-black-100 px-4 py-5 border-black-200"
-                // value={value}
-                placeholder="Search for a video topic"
-                placeholderTextColor="#CDCDE0"
-                // onChangeText={handleChangeText}
-              />
-              <Image
-                source={icons.search}
-                resizeMode="contain"
-                className="h-5 w-5 absolute right-4"
-              />
-            </View>
+            <SearchInput />
             <Text className="text-lg text-gray-100 leading-5 font-pregular tracking-wide pb-5">
               Latest Videos
             </Text>
