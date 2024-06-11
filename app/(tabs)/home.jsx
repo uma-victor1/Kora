@@ -55,7 +55,7 @@ const Home = () => {
             </View>
             <SearchInput />
             <Text className="text-lg text-gray-100 leading-5 font-pregular tracking-wide pb-5">
-              Latest Videos
+              Latest Videos.
             </Text>
             <TrendingVideos trendingVideos={latestVideos ?? []} />
           </View>
