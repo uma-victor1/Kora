@@ -62,7 +62,7 @@ const UseGlobalProvider = ({ children }) => {
     try {
       await account.deleteSession("current");
       setUser(null);
-      router.push("/");
+      router.push("/sign-in");
     } catch (error) {
       console.log(error);
       throw new Error(error.message);

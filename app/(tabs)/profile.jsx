@@ -6,36 +6,23 @@ import { icons } from "../../constants";
 import useAppwrite from "../../hooks/useAppwrite";
 import { getUserPosts, signOut } from "../../lib/appwrite";
 import { useGlobalContext } from "../../contexts/globalContext";
-import { EmptyState, InfoBox, VideoCard } from "../../components";
+import VideoCard from "../../components/Video";
+import EmptyComponent from "../../components/EmptyComponent";
+import InfoBox from "../../components/InfoBox";
 
 const Profile = () => {
-  const { user, setUser, setIsLogged } = useGlobalContext();
-  const { data: posts } = useAppwrite(() => getUserPosts(user.$id));
+  const { user, setUser, logout } = useGlobalContext();
+  const { data: posts } = useAppwrite(() => getUserPosts(user.email));
 
-  const logout = async () => {
-    await signOut();
-    setUser(null);
-    setIsLogged(false);
-
-    router.replace("/sign-in");
-  };
-
+  console.log(user);
   return (
     <SafeAreaView className="bg-primary h-full">
       <FlatList
         data={posts}
         keyExtractor={(item) => item.$id}
-        renderItem={({ item }) => (
-          <VideoCard
-            title={item.title}
-            thumbnail={item.thumbnail}
-            video={item.video}
-            creator={item.creator.username}
-            avatar={item.creator.avatar}
-          />
-        )}
+        renderItem={({ item }) => <VideoCard video={item} />}
         ListEmptyComponent={() => (
-          <EmptyState
+          <EmptyComponent
             title="No Videos Found"
             subtitle="No videos found for this profile"
           />
