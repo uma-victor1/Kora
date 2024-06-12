@@ -1,11 +1,18 @@
-import { View, Text, TextInput, Image, TouchableOpacity } from "react-native";
+import {
+  View,
+  Text,
+  TextInput,
+  Image,
+  TouchableOpacity,
+  Alert,
+} from "react-native";
 import { usePathname, router } from "expo-router";
 import React, { useState } from "react";
 import { icons } from "../constants";
 
-const SearchInput = () => {
+const SearchInput = ({ initialQuery }) => {
   const pathname = usePathname();
-  const [query, setQuery] = useState("");
+  const [query, setQuery] = useState(initialQuery || "");
   return (
     <View className="flex-row justify-between border-[1px] items-center rounded-xl focus:border-secondary relative">
       <TextInput
@@ -24,7 +31,7 @@ const SearchInput = () => {
             );
           }
           if (pathname.startsWith("./search")) {
-            router.setParam({ query });
+            router.setParams({ query });
           } else router.push(`/search/${query}`);
         }}
       >
