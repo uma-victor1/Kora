@@ -21,7 +21,11 @@ import { useLocalSearchParams } from "expo-router";
 const Search = () => {
   const { query } = useLocalSearchParams();
 
-  const { data: videos, isLoading, refetch } = useAppwrite(searchPosts(query));
+  const {
+    data: videos,
+    isLoading,
+    refetch,
+  } = useAppwrite(() => searchPosts(query));
 
   console.log(JSON.stringify(...videos, null, "\t"), "posts");
 
