@@ -12,8 +12,8 @@ import InfoBox from "../../components/InfoBox";
 
 const Profile = () => {
   const { user, setUser, logout } = useGlobalContext();
-  const { data: posts } = useAppwrite(() => getUserPosts(user.email));
-
+  const { data: posts } = useAppwrite(() => getUserPosts(user.$id));
+  console.log(posts, user, "posts");
   console.log(user);
   return (
     <SafeAreaView className="bg-primary h-full">

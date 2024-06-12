@@ -1,7 +1,7 @@
 import { account, avatar, database, ID, config } from "../lib/appwrite";
 import { useState, useEffect, createContext, useContext } from "react";
 import { router } from "expo-router";
-
+import { getCurrentUser } from "../lib/appwrite";
 const GlobalContext = createContext();
 
 /**
@@ -71,7 +71,7 @@ const UseGlobalProvider = ({ children }) => {
 
   async function init() {
     try {
-      const loggedIn = await account.get();
+      const loggedIn = await getCurrentUser();
       setUser(loggedIn);
     } catch (err) {
       setUser(null);
