@@ -17,11 +17,12 @@ import VideoCard from "../../components/Video";
 import { getLatestPosts } from "../../lib/appwrite";
 import TrendingVideos from "../../components/TrendingVideos";
 import SearchInput from "../../components/SearchInput";
+import { useGlobalContext } from "../../contexts/globalContext";
 const Home = () => {
   const { data: videos, isLoading, refetch } = useAppwrite(getAllPosts);
   const { data: latestVideos } = useAppwrite(getLatestPosts);
+  const { user } = useGlobalContext();
 
-  console.log(JSON.stringify(...latestVideos, null, "\t"), "posts");
   const [refreshing, setRefreshing] = useState(false);
   const onRefresh = async () => {
     setRefreshing(true);
@@ -44,7 +45,7 @@ const Home = () => {
                   Welcome Back
                 </Text>
                 <Text className="text-2xl font-psemibold text-white">
-                  Uma Victor
+                  {user?.username}
                 </Text>
               </View>
               <Image
