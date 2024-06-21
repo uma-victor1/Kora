@@ -57,7 +57,7 @@ npm install
 **Running the Project**
 
 ```bash
-npm start
+npm expo start
 ```
 
 **Expo Go**
