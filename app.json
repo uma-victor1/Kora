@@ -12,16 +12,24 @@
       "backgroundColor": "#ffffff"
     },
     "scheme": "kora",
-    "assetBundlePatterns": ["**/*"],
+    "assetBundlePatterns": [
+      "**/*"
+    ],
     "ios": {
       "supportsTablet": true,
-      "package": "com.madfinger.kora"
+      "package": "com.madfinger.kora",
+      "bundleIdentifier": "com.umavictor.kora"
     },
     "android": {
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#ffffff"
-      }
+      },
+      "permissions": [
+        "android.permission.RECORD_AUDIO",
+        "android.permission.MODIFY_AUDIO_SETTINGS"
+      ],
+      "package": "com.umavictor.kora"
     },
     "web": {
       "bundler": "metro"
@@ -34,6 +42,14 @@
           "microphonePermission": "Allow Kora to access your microphone."
         }
       ]
-    ]
+    ],
+    "extra": {
+      "router": {
+        "origin": false
+      },
+      "eas": {
+        "projectId": "228e3307-aa52-4967-acf9-cfccbbbb7d69"
+      }
+    }
   }
 }
