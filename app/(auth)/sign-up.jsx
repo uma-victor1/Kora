@@ -6,7 +6,7 @@ import FormField from "../../components/FormField";
 import { images } from "../../constants";
 import CustomButton from "../../components/CustomButton";
 import { Link, router } from "expo-router";
-import { useGlobalContext } from "../../contexts/globalContext";
+import { useGlobalContext } from "../../contexts/globalcontext";
 
 const SignUp = () => {
   const [form, setForm] = useState({

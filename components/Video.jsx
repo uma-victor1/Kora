@@ -2,14 +2,7 @@ import { View, Text, Image, TouchableOpacity } from "react-native";
 import React, { useState } from "react";
 import { icons } from "../constants";
 import { ResizeMode, Video } from "expo-av";
-const VideoCard = ({
-  video: {
-    title,
-    thumbnail,
-    video,
-    creators: { username, avatar },
-  },
-}) => {
+const VideoCard = ({ video }) => {
   const [play, setPlay] = useState(false);
   return (
     <View className="flex-col items-center px-4 mb-14">
@@ -17,7 +10,12 @@ const VideoCard = ({
         <View className="justify-center items-center flex-row flex-1">
           <View className="w-[46px] h-[46px] rounded-lg border border-secondary justify-center items-center p-0.5">
             <Image
-              source={{ uri: avatar }}
+              source={{
+                uri:
+                  video.creators !== null
+                    ? video.creators.avatar
+                    : "https://cloud.appwrite.io/v1/avatars/initials?name=Uma&project=66410fcf0003be863154",
+              }}
               resizeMode="cover"
               className="w-full h-full rounded-lg"
             ></Image>
@@ -27,13 +25,13 @@ const VideoCard = ({
               className="text-white font-psemibold text-sm"
               numberOfLines={1}
             >
-              {title}
+              {video.title}
             </Text>
             <Text
               className=" font-pregular text-xs text-gray-100"
               numberOfLines={1}
             >
-              {username}
+              {video.creators !== null && video.creators.username}
             </Text>
           </View>
         </View>
@@ -50,7 +48,7 @@ const VideoCard = ({
         <Video
           onError={(err) => console.log(err, "errorplay")}
           source={{
-            uri: video,
+            uri: video.video,
           }}
           className="w-full h-60 rounded-xl mt-3"
           resizeMode={ResizeMode.CONTAIN}
@@ -71,7 +69,7 @@ const VideoCard = ({
           }}
         >
           <Image
-            source={{ uri: thumbnail }}
+            source={{ uri: video.thumbnail }}
             className="w-full h-full rounded-xl mt-3"
             resizeMode="cover"
           ></Image>

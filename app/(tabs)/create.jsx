@@ -17,7 +17,7 @@ import { createVideoPost } from "../../lib/appwrite";
 
 import FormField from "../../components/FormField";
 import CustomButton from "../../components/CustomButton";
-import { useGlobalContext } from "../../contexts/globalContext";
+import { useGlobalContext } from "../../contexts/globalcontext";
 
 const Create = () => {
   const { user } = useGlobalContext();

@@ -5,7 +5,7 @@ import { View, Image, FlatList, TouchableOpacity } from "react-native";
 import { icons } from "../../constants";
 import useAppwrite from "../../hooks/useAppwrite";
 import { getUserPosts, signOut } from "../../lib/appwrite";
-import { useGlobalContext } from "../../contexts/globalContext";
+import { useGlobalContext } from "../../contexts/globalcontext";
 import VideoCard from "../../components/Video";
 import EmptyComponent from "../../components/EmptyComponent";
 import InfoBox from "../../components/InfoBox";

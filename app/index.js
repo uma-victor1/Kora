@@ -4,7 +4,7 @@ import { Redirect, router } from "expo-router";
 import { SafeAreaView } from "react-native-safe-area-context";
 import CustomButton from "../components/CustomButton";
 import { images } from "../constants";
-import { useGlobalContext } from "../contexts/globalContext";
+import { useGlobalContext } from "../contexts/globalcontext";
 
 export default function App() {
   const { user } = useGlobalContext();

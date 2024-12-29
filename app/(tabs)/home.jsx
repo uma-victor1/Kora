@@ -17,7 +17,7 @@ import VideoCard from "../../components/Video";
 import { getLatestPosts } from "../../lib/appwrite";
 import TrendingVideos from "../../components/TrendingVideos";
 import SearchInput from "../../components/SearchInput";
-import { useGlobalContext } from "../../contexts/globalContext";
+import { useGlobalContext } from "../../contexts/globalcontext";
 const Home = () => {
   const { data: videos, isLoading, refetch } = useAppwrite(getAllPosts);
   const { data: latestVideos } = useAppwrite(getLatestPosts);
@@ -30,6 +30,26 @@ const Home = () => {
     await refetch();
     setRefreshing(false);
   };
+  if (!user || !videos || !latestVideos) {
+    return (
+      <SafeAreaView className="bg-primary h-full">
+        <EmptyComponent
+          title="No Videos Found"
+          subtitle="No videos found for this profile"
+        />
+      </SafeAreaView>
+    );
+  }
+  if (videos.length < 1) {
+    return (
+      <SafeAreaView className="bg-primary h-full">
+        <EmptyComponent
+          title="No Videos Found"
+          subtitle="No videos found for this profile"
+        />
+      </SafeAreaView>
+    );
+  }
 
   return (
     <SafeAreaView className="bg-primary h-full">
@@ -42,11 +62,9 @@ const Home = () => {
             <View className="justify-between items-start flex-row mb-6">
               <View>
                 <Text className="font-pmedium text-sm text-gray-100">
-                  Welcome Back
+                  Welcome Back {user.username}
                 </Text>
-                <Text className="text-2xl font-psemibold text-white">
-                  {user?.username}
-                </Text>
+                <Text className="text-2xl font-psemibold text-white"></Text>
               </View>
               <Image
                 source={images.logoSmall}
