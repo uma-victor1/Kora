@@ -53,6 +53,7 @@ const UseGlobalProvider = ({ children }) => {
         password
       );
       if (!loggedIn) throw new Error("couldn't sign in (signin function)");
+      setUser(loggedIn);
       return loggedIn;
     } catch (error) {
       throw new Error(error.message);
